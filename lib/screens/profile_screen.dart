@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:task_manager/screens/analytics_screen.dart';
+import 'package:task_manager/screens/tasks_screen.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -40,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
               ),
              SizedBox(height: 14),
          Padding(
-           padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
+           padding: const EdgeInsets.fromLTRB(50, 10, 10, 0),
 
              child: Container(
                width: 136,height: 128,
@@ -103,43 +105,63 @@ Padding(
               SizedBox(height: 65),
               Padding(
                   padding: EdgeInsets.only(left: 44),
-                child: Row(
-                  children: [
-                    Icon(Icons.grid_view_rounded,
-                    color: Colors.white.withOpacity(0.7),
-                    ),
-                    SizedBox(width: 13,),
-                    Text(
-                      'Categories',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w300,
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(
+                            builder: (context)=>const TasksScreen(),
+                        ),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.grid_view_rounded,
+                      color: Colors.white.withOpacity(0.7),
                       ),
-                    ),
-
-                  ],
+                      SizedBox(width: 13,),
+                      Text(
+                        'Categories',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                  
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 45,),
               Padding(
                   padding:EdgeInsets.only(left: 43),
-                child: Row(
-                  children: [
-                    Icon(Icons.bar_chart_outlined,
-                    color: Colors.white.withOpacity(0.7),
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context)=>AnalyticsScreen(),
+                      )
 
-                    ),
-                    SizedBox(width: 24,),
-                    Text(
-                      "Analytics",
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                        fontSize: 24,
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.bar_chart_outlined,
+                      color: Colors.white.withOpacity(0.7),
+
                       ),
-                    )
-                  ],
+                      SizedBox(width: 24,),
+                      Text(
+                        "Analytics",
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w300,
+                          fontSize: 24,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
 
@@ -166,7 +188,7 @@ Expanded(
         text: 'Software Engineering',
         style: GoogleFonts.poppins(
           color: Colors.lightGreen,
-          fontSize: 34,
+          fontSize: 30,
           fontWeight: FontWeight.bold,
         )
     ),

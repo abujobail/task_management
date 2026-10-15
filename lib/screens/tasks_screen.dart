@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:task_manager/screens/add_task_screen.dart';
 
 class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
@@ -39,9 +40,11 @@ class _TasksScreenState extends State<TasksScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: const Icon(
-                        Icons.menu,
+                        Icons.arrow_back,
                         color: Color(0xFF000001),
                         size: 30,
                       ),
@@ -162,7 +165,12 @@ class _TasksScreenState extends State<TasksScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: (){},
+          onPressed: (){
+            Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (context)=>AddTaskScreen()),
+            );
+          },
         backgroundColor: Colors.transparent,
         child: Container(
           width: 89,

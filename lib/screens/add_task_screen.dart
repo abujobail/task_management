@@ -36,9 +36,11 @@ body: Container(
            Row(
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
              children: [
-               IconButton(onPressed: (){},
+               IconButton(onPressed: (){
+                 Navigator.pop(context);
+               },
                    icon: Icon(
-                     Icons.menu,
+                     Icons.arrow_back_ios_new,
                      color: Colors.black,
                      size: 30,
                    ),
@@ -107,7 +109,9 @@ body: Container(
         width: 153,
         height: 74,
         child: FloatingActionButton(
-            onPressed: (){},
+            onPressed: (){
+              Navigator.pop(context);
+            },
 
           backgroundColor: Colors.transparent,
           child: Container(
