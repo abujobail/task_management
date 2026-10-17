@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:task_manager/screens/analytics_screen.dart';
-import 'package:task_manager/screens/tasks_screen.dart';
+import 'package:task_manager/presentation//screens/analytics_screen.dart';
+import 'package:task_manager/presentation//screens/tasks_screen.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatelessWidget {
