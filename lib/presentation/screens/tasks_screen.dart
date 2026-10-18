@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:task_manager/presentation//screens/add_task_screen.dart';
-
+import 'package:task_manager/logic/task_controller.dart';
+import 'package:task_manager/presentation/widget/task_tile.dart';
 class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
 
@@ -9,8 +10,12 @@ class TasksScreen extends StatefulWidget {
   State<TasksScreen> createState() => _TasksScreenState();
 }
 
+
 class _TasksScreenState extends State<TasksScreen> {
-  @override
+
+
+  final TaskController _taskController = TaskController();
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -93,80 +98,49 @@ class _TasksScreenState extends State<TasksScreen> {
                 ),
                 const SizedBox(height: 60),
 
-                // ---------- Task 1: java backend ----------
-                Container(
-                  width: double.infinity,
-                  height: 60,
-                  padding: const EdgeInsets.fromLTRB(20, 14, 0, 12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF0E1438),
-                    borderRadius: BorderRadius.circular(300),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.check_box_outlined,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(width: 25),
-                      Text(
-                        "java backend",
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w200,
-                          fontSize: 24,
-                          color: Colors.white,
-                          letterSpacing: 1.2,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 9),
-
-                // ---------- Task 2: flutter ----------
-                Container(
-                  width: double.infinity,
-                  height: 60,
-                  padding: const EdgeInsets.fromLTRB(20, 14, 0, 12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF0E1438),
-                    borderRadius: BorderRadius.circular(300),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: const Color(0xFFED1597),
-                            width: 4,
+                //start
+                Expanded(
+                    child: _taskController.tasks.isEmpty?
+                        Center(
+                          child: Text(
+                            "no task available",
+                            style: GoogleFonts.poppins(
+                              color: Colors.white54,
+                              fontSize: 18,
+                            ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(width: 25),
-                      Text(
-                        "flutter",
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w200,
-                          fontSize: 24,
-                          color: Colors.white,
-                          letterSpacing: 1.2,
-                        ),
-                      ),
-                    ],
-                  ),
+                        )
+
+                  :ListView.builder(
+                    itemCount: _taskController.tasks.length,
+                    itemBuilder:(context,index){
+                      final task=_taskController.tasks[index];
+                      return TaskTile(
+                      task: task, onChanged: (value){
+                        setState(() {
+                          _taskController.toggleTaskStatus(task.id);
+                        });
+          },
+          onDelete: (){
+                        setState(() {
+                          _taskController.deleteTask(task.id);
+                        });
+          }
+          );
+
+          }
                 ),
+                ),
+
+
               ],
             ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: (){
-            Navigator.push(context,
+          onPressed: ()async{
+           await Navigator.push(context,
                 MaterialPageRoute(
                     builder: (context)=>AddTaskScreen()),
             );
@@ -197,3 +171,20 @@ class _TasksScreenState extends State<TasksScreen> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:task_manager/data/models/task_model.dart';
 
 class TaskTile extends StatelessWidget {
@@ -22,41 +23,48 @@ class TaskTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+      width: double.infinity,
+      height: 60,
+      padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1B4B).withOpacity(0.5),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white10),
+        color: const Color(0xFF0E1438), // আপনার কালার
+        borderRadius: BorderRadius.circular(300), // আপনার ক্যাপসুল বর্ডার
       ),
-      child: ListTile(
-        leading: Checkbox(
-            value: task.isCompleted,
-            onChanged: onChanged,
-          activeColor: Colors.purple,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
-
-          ),
-        ),
-
-        title: Text(
-          task.title,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            decoration: task.isCompleted ?
-            TextDecoration.lineThrough : TextDecoration.none
-          ),
-          ),
-        trailing: IconButton(
-            onPressed: onDelete,
+      child: Row(
+        children: [
+          // ১. চেকবক্স (টিক চিহ্ন)
+          IconButton(
             icon: Icon(
-              Icons.delete_outline,
-              color: Colors.redAccent,
+              task.isCompleted ? Icons.check_box : Icons.check_box_outline_blank,
+              color: task.isCompleted ? const Color(0xFFED1597) : Colors.grey,
             ),
-        ),
-        ),
-      );
+            onPressed: () => onChanged(!task.isCompleted),
+          ),
+          const SizedBox(width: 10),
+
+          // ২. টাস্কের নাম (আপনার Poppins ফন্ট দিয়ে)
+          Expanded(
+            child: Text(
+              task.title, // "java backend" এর বদলে ডায়নামিক ডাটা
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w200,
+                fontSize: 20,
+                color: Colors.white,
+                letterSpacing: 1.2,
+                decoration: task.isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+
+          // ৩. ডিলিট বাটন
+          IconButton(
+            onPressed: onDelete,
+            icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
+          ),
+        ],
+      ),
+    );
 
   }
 }
