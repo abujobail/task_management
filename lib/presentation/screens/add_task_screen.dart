@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:task_manager/logic/task_controller.dart';
+
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
 
@@ -9,6 +11,9 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
+
+  final TextEditingController _taskTitleController=TextEditingController();
+  final TaskController _taskController = TaskController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,14 +94,23 @@ body: Container(
                 color: Color(0xFFD9D9D9),
 
               ),
-              child: Text(
-                "write task",
+              child: TextField(
+                controller: _taskTitleController,
                 style: GoogleFonts.poppins(
-                  // color: Color(0xFF021005),
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w200,
+                  color: Colors.black, // ইউজার যা লিখবে তার কালার কালো হবে
+                  fontWeight: FontWeight.w400,
                   fontSize: 20,
                 ),
+                decoration: InputDecoration(
+                  hintText: "write task",
+                  hintStyle: GoogleFonts.poppins(
+                    color: Colors.black38, // ফিকে লেখার কালার
+                    fontWeight: FontWeight.w200,
+                    fontSize: 20,
+                  ),
+                  border: InputBorder.none,
+                ),
+
               ),
             ),
           ],
@@ -110,6 +124,9 @@ body: Container(
         height: 74,
         child: FloatingActionButton(
             onPressed: (){
+              if(_taskTitleController.text.isNotEmpty){
+                _taskController.AddTask(_taskTitleController.text);
+              }
               Navigator.pop(context);
             },
 

@@ -144,7 +144,11 @@ class _TasksScreenState extends State<TasksScreen> {
                 MaterialPageRoute(
                     builder: (context)=>AddTaskScreen()),
             );
+           setState(() {
+
+           });
           },
+
         backgroundColor: Colors.transparent,
         child: Container(
           width: 89,
