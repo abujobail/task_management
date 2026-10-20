@@ -26,6 +26,7 @@ class TaskTile extends StatelessWidget {
       width: double.infinity,
       height: 60,
       padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
+      margin: EdgeInsets.symmetric(vertical: 13),
       decoration: BoxDecoration(
         color: const Color(0xFF0E1438), // আপনার কালার
         borderRadius: BorderRadius.circular(300), // আপনার ক্যাপসুল বর্ডার
@@ -35,8 +36,8 @@ class TaskTile extends StatelessWidget {
           // ১. চেকবক্স (টিক চিহ্ন)
           IconButton(
             icon: Icon(
-              task.isCompleted ? Icons.check_box : Icons.check_box_outline_blank,
-              color: task.isCompleted ? const Color(0xFFED1597) : Colors.grey,
+              task.isCompleted ? Icons.check_circle : Icons.circle_outlined,
+              color: task.isCompleted ?  Colors.grey :Color(0xFFED1597) ,
             ),
             onPressed: () => onChanged(!task.isCompleted),
           ),
@@ -52,6 +53,8 @@ class TaskTile extends StatelessWidget {
                 color: Colors.white,
                 letterSpacing: 1.2,
                 decoration: task.isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
+                decorationColor: Colors.purpleAccent,
+                decorationThickness: 2,
               ),
               overflow: TextOverflow.ellipsis,
             ),
@@ -60,7 +63,7 @@ class TaskTile extends StatelessWidget {
           // ৩. ডিলিট বাটন
           IconButton(
             onPressed: onDelete,
-            icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
+            icon: const Icon(Icons.delete_outline, color: Colors.yellowAccent),
           ),
         ],
       ),
